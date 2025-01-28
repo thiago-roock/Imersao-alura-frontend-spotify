@@ -1,2 +1,2 @@
-# Imersao-alura-frontend-spotify ![CodeQL](https://github.com/thiago-roock/Imersao-alura-frontend-spotify/workflows/CodeQL/badge.svg)
- #Imersao-front-end-alura
+# Imersão Front-End 2ª Edição [![pages-build-deployment](https://github.com/thiago-roock/Imersao-alura-frontend-spotify/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/thiago-roock/Imersao-alura-frontend-spotify/actions/workflows/pages/pages-build-deployment)
+
