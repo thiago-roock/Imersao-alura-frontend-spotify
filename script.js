@@ -1,25 +1,22 @@
 const searchInput = document.getElementById('search-input');
 const resultArtist = document.getElementById("result-artist");
 const resultPlaylist = document.getElementById('result-playlists');
-
 function requestApi(searchTerm) {
-    let headers = new Headers();
-
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', 'application/json');
-    headers.append('Origin','http://localhost:5500');
-
-    const url = `http://localhost:3000/artists?name_like=${searchTerm}`;
-    fetch(url, {
-        mode: 'no-cors',
-        credentials: 'include',
-        method: 'GET',
-        headers: headers
-      })
-        .then((response) => response.json())
-        .then((result) => displayResults(result, searchTerm))
-        .catch(error => console.log('Request failed: ' + error.message));
-
+    //const url = `http://localhost:3000/artists?name_like=${searchTerm}`;
+    // fetch(url)
+    //     .then((response) => response.json())
+    //     .then((result) => displayResults(result, searchTerm))
+    //     .catch(error => console.log('Request failed: ' + error.message));
+    const urlbase = `/api-artists/artists.json?name_like=${searchTerm}`;
+        $.ajax({
+            url: urlbase,
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function onSuccess(data) {
+                displayResults(data, searchTerm);
+            }
+          });
 }
 
 function displayResults(result, searchTerm) {
@@ -27,7 +24,7 @@ function displayResults(result, searchTerm) {
     const gridContainer = document.querySelector('.grid-container');
     gridContainer.innerHTML = ''; // Limpa os resultados anteriores    
 
-    const filteredArtists = result.filter(artist => artist.name.toLowerCase().includes(searchTerm) );
+    const filteredArtists = result.artists.filter(artist => artist.name.toLowerCase().includes(searchTerm) );
 
 
   filteredArtists.forEach(artist => {    

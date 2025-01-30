@@ -19,6 +19,7 @@
 | HTML5 | Frontend   |
 | CSS3   |  Estilos   |
 | Javascript | Backend   |
+| Jquery | Backend   |
 | Json-server | Simulador de api   |
 
 
