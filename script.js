@@ -3,11 +3,23 @@ const resultArtist = document.getElementById("result-artist");
 const resultPlaylist = document.getElementById('result-playlists');
 
 function requestApi(searchTerm) {
-    //const url = `http://localhost:3000/artists?name_like=${searchTerm}`;
-    const url = `https://github.com/thiago-roock/Imersao-alura-frontend-spotify/blob/main/api-artists/artists.json?name_like=${searchTerm}`;
-    fetch(url)
+    let headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    headers.append('Origin','http://localhost:5500');
+
+    const url = `http://localhost:3000/artists?name_like=${searchTerm}`;
+    fetch(url, {
+        mode: 'no-cors',
+        credentials: 'include',
+        method: 'GET',
+        headers: headers
+      })
         .then((response) => response.json())
-        .then((result) => displayResults(result, searchTerm));
+        .then((result) => displayResults(result, searchTerm))
+        .catch(error => console.log('Request failed: ' + error.message));
+
 }
 
 function displayResults(result, searchTerm) {
