@@ -7,7 +7,13 @@ function requestApi(searchTerm) {
     //     .then((response) => response.json())
     //     .then((result) => displayResults(result, searchTerm))
     //     .catch(error => console.log('Request failed: ' + error.message));
-    const urlbase = `/api-artists/artists.json?name_like=${searchTerm}`;
+
+    //localhost
+    //const urlbase = `/api-artists/artists.json`;
+        
+    //produção
+    const urlbase = `/Imersao-alura-frontend-spotify/api-artists/artists.json`;
+
         $.ajax({
             url: urlbase,
             type: 'GET',
