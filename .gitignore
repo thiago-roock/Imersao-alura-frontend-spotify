@@ -1,0 +1,38 @@
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# Configurações do editor/IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Diretórios de build e cache (caso use ferramentas de build)
+dist/
+build/
+.cache/
+
+# Relatórios de erro e logs
+*.log
+logs/
+
+# Arquivos de deploy temporários
+*.tmp
+*.swp
+*.swo
+
+# Arquivos de configuração pessoal (caso use um ambiente específico)
+.env
+.env.local
+
+# Arquivos de cache do navegador (caso utilize service workers ou PWA)
+*.manifest
+*.webmanifest
+service-worker.js
+workbox-*
+sw.js
+sw.js.map

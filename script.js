@@ -1,68 +1,42 @@
-const searchInput = document.getElementById('search-input');
-const resultArtist = document.getElementById("result-artist");
-const resultPlaylist = document.getElementById('result-playlists');
-function requestApi(searchTerm) {
-    //const url = `http://localhost:3000/artists?name_like=${searchTerm}`;
-    // fetch(url)
-    //     .then((response) => response.json())
-    //     .then((result) => displayResults(result, searchTerm))
-    //     .catch(error => console.log('Request failed: ' + error.message));
+//BOM DIA | BOA TARDE | BOA NOITE
 
-    //localhost
-    //const urlbase = `/api-artists/artists.json`;
-        
-    //produção
-    const urlbase = `/Imersao-alura-frontend-spotify/api-artists/artists.json`;
+// Obtém a referência do elemento com o ID "greeting"
+const greetingElement = document.getElementById("greeting");
 
-        $.ajax({
-            url: urlbase,
-            type: 'GET',
-            dataType: 'json',
-            async: true,
-            success: function onSuccess(data) {
-                displayResults(data, searchTerm);
-            }
-          });
+// Obtém a hora atual do sistema
+const currentHour = new Date().getHours();
+
+//Define a saudação com base na hora atual
+if (currentHour >= 5 && currentHour < 12) {
+  greetingElement.textContent = "Bom dia";
+} else if (currentHour >= 12 && currentHour < 18) {
+  greetingElement.textContent = "Boa tarde";
+} else {
+  greetingElement.textContent = "Boa noite";
 }
 
-function displayResults(result, searchTerm) {
-    resultPlaylist.classList.add("hidden");
-    const gridContainer = document.querySelector('.grid-container');
-    gridContainer.innerHTML = ''; // Limpa os resultados anteriores    
+// Forma mais simples
+const greetingMessage =
+  currentHour >= 5 && currentHour < 12
+    ? "Bom dia"
+    : currentHour >= 12 && currentHour < 18
+    ? "Boa tarde"
+    : "Boa noite";
 
-    const filteredArtists = result.artists.filter(artist => artist.name.toLowerCase().includes(searchTerm) );
+greetingElement.textContent = greetingMessage;
 
+// GRID INTELIGENTE
+const container = document.querySelector(".offer__list-item");
 
-  filteredArtists.forEach(artist => {    
-      const artistCard = document.createElement('div');
-      artistCard.classList.add('artist-card');
+const observer = new ResizeObserver(() => {  //mudanças no tamanho do elemento 
+  const containerWidth = container.offsetWidth; //largura total do elemento, incluindo largura do conteúdo, bordas e preenchimento.
+  const numColumns = Math.floor(containerWidth / 200); //número de colunas com base na largura do container
 
-      artistCard.innerHTML = `
-          <div class="card-img">
-              <img class="artist-img" src="${artist.urlImg}" />
-              <div class="play">
-                  <span class="fa fa-solid fa-play"></span>
-              </div>
-          </div>
-      <div class="card-text">              
-              <span class="artist-name">${artist.name}</span>
-              <span class="artist-categorie">Artista</span>
-          </div>
-      `;
-       gridContainer.appendChild(artistCard);
-  });
+  //largura mínima de 200px e máxima de 1fr (uma fração do espaço disponível).
+  container.style.gridTemplateColumns = `repeat(${numColumns}, minmax(200px, 1fr))`;
 
-  resultArtist.classList.remove('hidden');
-}
-
-document.addEventListener('input', function () {
-    const searchTerm = searchInput.value.toLowerCase().trim();
-
-    if (searchTerm === '') {
-        resultPlaylist.classList.remove('hidden');
-        resultArtist.classList.add('hidden');
-        return;
-    }
-
-    requestApi(searchTerm);
+  console.log({ container });
+  console.log({ numColumns });
 });
+//observando a mudança do elemento
+observer.observe(container);
